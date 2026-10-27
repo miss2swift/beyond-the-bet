@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond the Bet | Honest Casino Reviews</title>
+    <title>Beyond the Bet | Alberta Casino Reviews</title>
     <style>
         :root {
             --bg-color: #0b0b0e;
@@ -23,6 +23,83 @@
             line-height: 1.6;
         }
 
+        /* Age Gate Modal Overlay */
+        #age-gate-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(7, 7, 10, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+        }
+
+        .age-gate-box {
+            background-color: var(--card-bg);
+            border: 2px solid var(--gold);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .age-gate-box h2 {
+            color: var(--gold);
+            margin-top: 0;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .age-gate-box p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .age-btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .age-btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-verify {
+            background: linear-gradient(135deg, var(--gold) 0%, #b99727 100%);
+            color: #000;
+        }
+
+        .btn-verify:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-deny {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--text-muted);
+        }
+
+        .btn-deny:hover {
+            border-color: #ff4d4d;
+            color: #ff4d4d;
+        }
+
+        /* Main Site Content */
         header {
             background: linear-gradient(135deg, #111118 0%, #1a1a24 100%);
             border-bottom: 2px solid var(--gold);
@@ -90,7 +167,7 @@
 
         .btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--gold) b99727 100%);
+            background: linear-gradient(135deg, var(--gold) 0%, #b99727 100%);
             color: #000;
             padding: 0.6rem 1.2rem;
             border-radius: 4px;
@@ -116,43 +193,72 @@
 </head>
 <body>
 
+    <!-- Age Verification Gate -->
+    <div id="age-gate-modal">
+        <div class="age-gate-box">
+            <h2>Alberta Age Verification</h2>
+            <p>You must be 18 or older and located in Alberta to access Beyond the Bet. Please confirm your age to continue.</p>
+            <div class="age-btn-group">
+                <button class="age-btn btn-verify" onclick="verifyAge()">I am 18+ in AB</button>
+                <button class="age-btn btn-deny" onclick="denyAge()">Exit</button>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="logo-area">🎰 Beyond the Bet</div>
-        <div class="tagline">Real Experience. Honest Casino & Game Reviews.</div>
+        <div class="tagline">Built for Alberta Players. Honest Reviews & Firsthand Insights.</div>
     </header>
 
     <main>
         <section class="intro-box">
-            <h2>Welcome to Beyond the Bet</h2>
-            <p>Navigating the world of online casinos can be tricky. This site is built on firsthand experience—breaking down game mechanics, payout reliability, and overall user ratings so you can make informed choices.</p>
+            <h2>Welcome to Beyond the Bet (Alberta Edition)</h2>
+            <p>Tailored specifically for players across Alberta. This site is built on firsthand experience playing at various online platforms, breaking down payout reliability, localized payment options, and game choices suited for Albertans.</p>
         </section>
 
-        <h2 style="color: var(--gold); margin-bottom: 1.5rem;">Featured Reviews</h2>
+        <h2 style="color: var(--gold); margin-bottom: 1.5rem;">Featured Alberta Reviews</h2>
         
         <div class="reviews-grid">
             <div class="review-card">
-                <h3>Casino Review One</h3>
-                <p>An in-depth look at game variety, mobile responsiveness, withdrawal speeds, and customer support quality.</p>
+                <h3>Platform Review One</h3>
+                <p>An in-depth look at account setup, local deposit methods, withdrawal speeds, and support quality for Alberta residents.</p>
                 <a href="#" class="btn">Read Review</a>
             </div>
 
             <div class="review-card">
-                <h3>Casino Review Two</h3>
-                <p>Evaluating user interface, bonuses, loyalty programs, and payment transparency based on real play sessions.</p>
+                <h3>Platform Review Two</h3>
+                <p>Evaluating user interface, ongoing promos, and real play experiences tailored for local players.</p>
                 <a href="#" class="btn">Read Review</a>
             </div>
 
             <div class="review-card">
-                <h3>Top Slot Breakdowns</h3>
-                <p>Exploring volatility, RTP expectations, and standout features of top-rated digital slot titles.</p>
+                <h3>Top Slot & Game Breakdowns</h3>
+                <p>Exploring volatility, RTP expectations, and standout features of popular digital titles.</p>
                 <a href="#" class="btn">Explore Games</a>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Beyond the Bet. All rights reserved. Informational review site only.</p>
+        <p>&copy; 2026 Beyond the Bet. Strictly for players in Alberta, Canada (18+). Informational review site only.</p>
     </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('ageVerifiedAB') === 'true') {
+                document.getElementById('age-gate-modal').style.display = 'none';
+            }
+        });
+
+        function verifyAge() {
+            localStorage.setItem('ageVerifiedAB', 'true');
+            document.getElementById('age-gate-modal').style.display = 'none';
+        }
+
+        function denyAge() {
+            window.location.href = 'https://www.google.com';
+        }
+    </script>
 
 </body>
 </html>
